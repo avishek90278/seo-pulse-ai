@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   description: "AI-powered SEO audit tool for non-technical users. Get actionable fixes in seconds.",
 };
 
+import Footer from "@/components/Footer";
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,10 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
         suppressHydrationWarning
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
