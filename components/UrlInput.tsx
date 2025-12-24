@@ -27,7 +27,7 @@ export default function UrlInput() {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="Enter website URL (e.g., example.com)"
-                    className="w-full px-6 py-4 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all shadow-sm text-gray-800"
+                    className="w-full px-6 py-4 text-lg rounded-full bg-white/10 border-2 border-white/10 focus:border-blue-500 focus:bg-white/20 outline-none transition-all shadow-sm text-white placeholder:text-gray-400 backdrop-blur-md"
                     disabled={loading}
                 />
                 <button
