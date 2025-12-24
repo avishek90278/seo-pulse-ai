@@ -119,7 +119,7 @@ function detectContext($: cheerio.CheerioAPI, url: string, title: string | null,
 function analyzeStructure($: cheerio.CheerioAPI, url: string): SeoStructure {
     const headingsMap: { level: number; text: string }[] = [];
     $('h1, h2, h3').each((_, el) => {
-        const tagName = $(el).prop('tagName').toLowerCase();
+        const tagName = ($(el).prop('tagName') || '').toLowerCase();
         const level = parseInt(tagName.replace('h', ''));
         headingsMap.push({ level, text: $(el).text().trim() });
     });

@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -8,8 +6,6 @@ import SeoScore from '@/components/SeoScore';
 import SeoIssues from '@/components/SeoIssues';
 import AiSuggestions from '@/components/AiSuggestions';
 import { SeoResult } from '@/types/seo';
-
-import { analyzeUrlAction } from '@/app/actions/analyze';
 
 function ResultContent() {
     const searchParams = useSearchParams();
@@ -29,14 +25,19 @@ function ResultContent() {
 
         const analyze = async () => {
             try {
-                // Use Server Action to securely call the locked API
-                const res = await analyzeUrlAction(url);
+                const res = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url }),
+                });
 
-                if (!res.success) {
-                    throw new Error(res.error || 'Analysis failed');
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Analysis failed');
                 }
 
-                setResult(res.data);
+                setResult(data);
             } catch (err: any) {
                 setError(err.message);
             } finally {
